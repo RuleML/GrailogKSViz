@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://deliberation.ruleml.org/1.01/relaxng/datalogplus_min_relaxed.rnc"?>
+<?xml-stylesheet type="text/xsl" href="Renderer.xslt"?>
+<RuleML>
+  <Assert>
+    <Implies>
+	  <And>
+	    <Atom>
+	      <Rel>connects</Rel>
+	      <Var>E</Var>
+	      <Var>V</Var>
+	      <Var>U</Var>
+	    </Atom>
+		<Equal>
+	      <Var>V</Var>
+	      <Var>U</Var>
+	    </Equal>
+		<Atom>
+	      <Rel>vertex</Rel>
+	      <Var>V</Var>
+	    </Atom>
+		<Atom>
+	      <Rel>vertex</Rel>
+	      <Var>U</Var>
+	    </Atom>
+		<Atom>
+	      <Rel>edge</Rel>
+	      <Var>E</Var>
+	    </Atom>
+	  </And>
+	  <Equal>
+	    <Var>E</Var>
+		<Ind>EdgeLoop</Ind>
+	  </Equal> 	  
+    </Implies>     
+  </Assert>
+</RuleML>

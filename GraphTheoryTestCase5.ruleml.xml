@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.ruleml.org/1.0/relaxng/hornlogeq_relaxed.rnc"?>
+<?xml-stylesheet type="text/xsl" href="Renderer.xslt"?>
+<RuleML>
+    <Assert>
+        <Implies>
+            <And>
+                <Atom>
+                    <Rel>vertex</Rel>
+                    <Var>U</Var>
+                </Atom>
+                <Atom>
+                    <Rel>vertex</Rel>
+                    <Var>W</Var>
+                </Atom>
+                <Equal>
+                    <Var>E2</Var>
+                    <Expr>
+                        <Fun per="copy">edgeSubSet</Fun>
+                        <Var>E1</Var>
+                    </Expr>
+                </Equal>
+                <Equal>
+                    <Var>V2</Var>
+                    <Expr>
+                        <Fun per="copy">vertexSubSet</Fun>
+                        <Var>V1</Var>
+                    </Expr>
+                </Equal>
+                <Equal>
+                    <Expr>
+                        <Fun per="copy">graph</Fun>
+                        <Var>V2</Var>
+                        <Var>E2</Var>
+                    </Expr>
+                    <Expr>
+                        <Fun per="copy">graphDiff</Fun>
+                        <Expr>
+                            <Fun per="copy">graph</Fun>
+                            <Var>V1</Var>
+                            <Var>E1</Var>
+                        </Expr>
+                        <Expr>
+                            <Fun per="copy">graph</Fun>
+                            <Var>U</Var>
+                            <Expr>
+                                <Fun per="copy">set</Fun>
+                                <Expr>
+                                    <Fun per="copy">pair</Fun>
+                                    <Var>U</Var>
+                                    <Var>W</Var>
+                                </Expr>
+                            </Expr>
+                        </Expr>
+                    </Expr>
+                </Equal>
+            </And>
+            <Atom>
+                <Rel>subGraph</Rel>
+                <Expr>
+                    <Fun per="copy">graph</Fun>
+                    <Var>V2</Var>
+                    <Var>E2</Var>
+                </Expr>
+                <Expr>
+                    <Fun per="copy">graph</Fun>
+                    <Var>V1</Var>
+                    <Var>E1</Var>
+                </Expr>
+            </Atom>
+        </Implies>
+    </Assert>
+</RuleML>

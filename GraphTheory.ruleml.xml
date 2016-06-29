@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.ruleml.org/1.0/relaxng/hornlogeq_relaxed.rnc"?>
+<RuleML>
+  <Assert>
+    <!-- the node pair (N1, N2) is the same as (N2, N1)
+    for an undirected arc -->
+    <Implies>
+	  <And>
+	    <Atom>
+		  <Rel>node</Rel>
+		  <Var>N1</Var>
+		</Atom>
+		<Atom>
+		  <Rel>node</Rel>
+		  <Var>N2</Var>
+		</Atom>
+	  </And>
+	  <Equal>
+		<Expr>
+		  <Fun per="copy">undirectedArc</Fun>
+		  <Var>N1</Var>
+		  <Var>N2</Var>
+		</Expr>
+		<Expr>
+		  <Fun per="copy">undirectedArc</Fun>
+		  <Var>N2</Var>
+		  <Var>N1</Var>
+		</Expr>
+	  </Equal>
+	</Implies>
+  </Assert>
+</RuleML>

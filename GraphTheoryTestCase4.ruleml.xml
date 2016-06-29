@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.ruleml.org/1.0/relaxng/hornlogeq_relaxed.rnc"?>
+<?xml-stylesheet type="text/xsl" href="Renderer.xslt"?>
+<RuleML>
+    <Assert>
+        <Implies>
+            <And>
+                <Atom>
+                    <Rel>vertex</Rel>
+                    <Var>Vk</Var>
+                </Atom>
+                <Atom>
+                    <Rel>vertex</Rel>
+                    <Var>Vj</Var>
+                </Atom>
+                <Atom>
+                    <Rel>distinct</Rel>
+                    <Expr>
+                        <Fun per="copy">pair</Fun>
+                        <Var>Vk</Var>
+                        <Var>Vj</Var>
+                    </Expr>
+                </Atom>
+                <Equal>
+                    <Var>V</Var>
+                    <Expr>
+                        <Fun per="copy">set</Fun>
+                        <Var>Vk</Var>
+                    </Expr>
+                </Equal>
+                <Equal>
+                    <Var>E</Var>
+                    <Expr>
+                        <Fun per="copy">set</Fun>
+                        <Expr>
+                            <Fun per="copy">pair</Fun>
+                            <Var>Vk</Var>
+                            <Var>Vj</Var>
+                        </Expr>
+                    </Expr>
+                </Equal>
+                <Atom>
+                    <Rel>greaterOrEqual</Rel>
+                    <Expr>
+                        <Fun per="copy">cardinality</Fun>
+                        <Var>V</Var>
+                    </Expr>
+                    <Ind>1</Ind>
+                </Atom>
+                <Atom>
+                    <Rel>greaterOrEqual</Rel>
+                    <Expr>
+                        <Fun per="copy">cardinality</Fun>
+                        <Var>E</Var>
+                    </Expr>
+                    <Ind>0</Ind>
+                </Atom>
+            </And>
+            <Atom>
+                <Rel>simpleGraph</Rel>
+                <Expr>
+                    <Fun per="copy">graph</Fun>
+                    <Var>V</Var>
+                    <Var>E</Var>
+                </Expr>
+            </Atom>
+        </Implies>
+    </Assert>
+</RuleML>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.ruleml.org/1.0/relaxng/hornlogeq_relaxed.rnc"?>
+<?xml-stylesheet type="text/xsl" href="Renderer.xslt"?>
+<RuleML>
+    <Assert>
+        <Implies>
+            <And>
+                <Atom>
+                    <Rel>vertex</Rel>
+                    <Var>Vk</Var>
+                </Atom>
+                <Atom>
+                    <Rel>vertex</Rel>
+                    <Var>Vj</Var>
+                </Atom>
+                <Atom>
+                    <Rel>edge</Rel>
+                    <Expr>
+                        <Fun per="copy">pair</Fun>
+                        <Var>Vk</Var>
+                        <Var>Vj</Var>
+                    </Expr>
+                </Atom>
+            </And>
+            <Atom>
+                <Rel>adjacentVertex</Rel>
+                <Var>Vk</Var>
+                <Var>Vj</Var>
+            </Atom>
+        </Implies>
+    </Assert>
+ </RuleML>

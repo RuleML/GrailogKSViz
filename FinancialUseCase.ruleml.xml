@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.ruleml.org/1.0/relaxng/hornlogeq_relaxed.rnc"?>
+<?xml-stylesheet type="text/xsl" href="Renderer.xslt"?>
+<RuleML>
+    <Assert>
+        <!-- Sponsor Level is associated with 
+          a colour and amount in USD -->
+        <Atom>
+            <Rel>sponsorLevel</Rel>
+            <Ind>Bronze</Ind>
+            <Ind>500.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>sponsorLevel</Rel>
+            <Ind>Silver</Ind>
+            <Ind>1000.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>sponsorLevel</Rel>
+            <Ind>Gold</Ind>
+            <Ind>3000.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>sponsorLevel</Rel>
+            <Ind>Platinum</Ind>
+            <Ind>5000.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>sponsorLevel</Rel>
+            <Ind>Emerald</Ind>
+            <Ind>7500.00</Ind>
+        </Atom>
+        <!-- Sponsor of RuleML Symposium -->
+        <Atom>
+            <Rel>sponsor</Rel>
+            <Expr>
+                <Fun per="copy">name</Fun>
+                <Ind>OASISLegalXML</Ind>
+            </Expr>
+            <Ind>Silver</Ind>
+        </Atom>
+        <!-- Speakers at RuleML Symposium -->
+        <Atom>
+            <Rel>speaker</Rel>
+            <Expr>
+                <Fun per="copy">name</Fun>
+                <Ind>MichaelGruninger</Ind>
+            </Expr>
+            <Ind>Keynote</Ind>
+        </Atom>
+        <Atom>
+            <Rel>speaker</Rel>
+            <Expr>
+                <Fun per="copy">name</Fun>
+                <Ind>BenjaminGrosof</Ind>
+            </Expr>
+            <Ind>InvitedTalk</Ind>
+        </Atom>
+        <!-- Type of speaker is associated 
+        with a reimbursement -->
+        <Atom>
+            <Rel>reimburse</Rel>
+            <Ind>Keynote</Ind>
+            <Ind>400.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>reimburse</Rel>
+            <Ind>InvitedTalk</Ind>
+            <Ind>0.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>reimburse</Rel>
+            <Ind>Tutorial</Ind>
+            <Ind>0.00</Ind>
+        </Atom>
+        <!-- Registration fee is associated 
+        with a type of participant -->
+        <Atom>
+            <Rel>registrationFee</Rel>
+            <Ind>Student</Ind>
+            <Ind>Early</Ind>
+            <Ind>150.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>registrationFee</Rel>
+            <Ind>Student</Ind>
+            <Ind>Late</Ind>
+            <Ind>250.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>registrationFee</Rel>
+            <Ind>MemberOrPartner</Ind>
+            <Ind>Early</Ind>
+            <Ind>400.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>registrationFee</Rel>
+            <Ind>MemberOrPartner</Ind>
+            <Ind>Late</Ind>
+            <Ind>500.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>registrationFee</Rel>
+            <Ind>NonMember</Ind>
+            <Ind>Early</Ind>
+            <Ind>450.00</Ind>
+        </Atom>
+        <Atom>
+            <Rel>registrationFee</Rel>
+            <Ind>NonMember</Ind>
+            <Ind>Late</Ind>
+            <Ind>550.00</Ind>
+        </Atom>
+        <!-- The web service fee is associated 
+        with a type of participant -->
+        <Atom>
+            <Rel>webServiceFee</Rel>
+            <Ind>Student</Ind>
+            <Ind>4.74</Ind>
+        </Atom>
+        <Atom>
+            <Rel>webServiceFee</Rel>
+            <Ind>MemberOrPartner</Ind>
+            <Ind>9.95</Ind>
+        </Atom>
+        <Atom>
+            <Rel>webServiceFee</Rel>
+            <Ind>NonMember</Ind>
+            <Ind>9.95</Ind>
+        </Atom>
+        <!-- Participants at RuleML Symposium -->
+        <Atom>
+            <Rel>participant</Rel>
+            <Expr>
+                <Fun per="copy">id</Fun>
+                <Ind>179676719</Ind>
+            </Expr>
+            <Ind>Student</Ind>
+            <Ind>Late</Ind>
+        </Atom>
+        <Atom>
+            <Rel>participant</Rel>
+            <Expr>
+                <Fun per="copy">id</Fun>
+                <Ind>177691773</Ind>
+            </Expr>
+            <Ind>MemberOrPartner</Ind>
+            <Ind>Early</Ind>
+        </Atom>
+        <!-- Conversion from USD to CAD 
+        at a rate of 1.3 -->
+        <Implies>
+            <Atom>	
+                <Rel>mulitply</Rel>
+                <Var>USDAmount</Var>
+                <Ind>1.3</Ind>
+                <Var>CADAmount</Var>
+            </Atom>
+            <Atom>
+                <Rel>convertUSDToCAD</Rel>
+                <Var>USDAmount</Var>
+                <Var>CADAmount</Var>
+            </Atom>
+        </Implies>
+        <!-- Income of sponsorship from an organization  
+        is converted and deposited into the CAD account -->
+        <Implies>
+            <And>
+                <Atom>
+                    <Rel>sponsor</Rel>
+                    <Expr>
+                        <Fun per="copy">name</Fun>
+                        <Var>Organization</Var>
+                    </Expr>
+                    <Var>Level</Var>
+                </Atom>
+                <Atom>
+                    <Rel>sponsorLevel</Rel>
+                    <Var>Level</Var>
+                    <Var>AmountUSD</Var>
+                </Atom>
+                <Atom>
+                    <Rel>convertUSDToCAD</Rel>
+                    <Var>AmountUSD</Var>
+                    <Var>AmountCAD</Var>
+                </Atom>
+                <Atom>
+                    <Rel>incoming</Rel>
+                    <Expr>
+                        <Fun per="copy">name</Fun>
+                        <Var>Organization</Var>
+                    </Expr>
+                    <Var>AmountCAD</Var>
+                    <Ind>CIBCToronto</Ind>
+                </Atom>
+            </And>
+            <Atom>
+                <Rel>income</Rel>
+                <Expr>
+                    <Fun per="copy">sponsorship</Fun>
+                    <Expr>
+                        <Fun per="copy">name</Fun>
+                        <Ind>OASISLegalXML</Ind>
+                    </Expr>
+                    <Var>Level</Var>
+                    <Var>AmountCAD</Var>
+                </Expr>
+            </Atom>
+        </Implies>
+        <!-- Conversion from gross income to net income -->
+        <Implies>
+            <And>
+                <Atom>	
+                    <Rel>webServiceFee</Rel>
+                    <Var>ParticipantType</Var>
+                    <Var>FeeAmount</Var>
+                </Atom>
+                <Atom>	
+                    <Rel>subtract</Rel>
+                    <Var>GrossUSDAmount</Var>
+                    <Var>FeeAmount</Var>
+                    <Var>NetUSDAmount</Var>
+                </Atom>
+            </And>
+            <Atom>
+                <Rel>convertGrossToNet</Rel>
+                <Var>GrossUSDAmount</Var>
+                <Var>NetUSDAmount</Var>
+                <Var>ParticipantType</Var>
+            </Atom>
+        </Implies>
+        <!-- Income of registration from a participant  
+        is deposited into the Paypal account -->
+        <Implies>
+            <And>
+                <Atom>
+                    <Rel>participant</Rel>
+                    <Expr>
+                        <Fun per="copy">id</Fun>
+                        <Var>IDNumber</Var>
+                    </Expr>
+                    <Var>ParticipantType</Var>
+                    <Var>RegistrationType</Var>
+                </Atom>
+                <Atom>
+                    <Rel>registrationFee</Rel>
+                    <Var>ParticipantType</Var>
+                    <Var>RegistrationType</Var>
+                    <Var>AmountUSD</Var>
+                </Atom>
+                <Atom>
+                    <Rel>convertGrossToNet</Rel>
+                    <Var>AmountUSD</Var>
+                    <Var>NetAmountUSD</Var>
+                    <Var>ParticipantType</Var>
+                </Atom>
+                <Atom>
+                    <Rel>incoming</Rel>
+                    <Expr>
+                        <Fun per="copy">id</Fun>
+                        <Var>IDNumber</Var>
+                    </Expr>
+                    <Var>NetAmountUSD</Var>
+                    <Ind>Paypal</Ind>
+                </Atom>
+            </And>
+            <Atom>
+                <Rel>income</Rel>
+                <Expr>
+                    <Fun per="copy">registration</Fun>
+                    <Expr>
+                        <Fun per="copy">id</Fun>
+                        <Var>IDNumber</Var>
+                    </Expr>
+                    <Var>ParticipantType</Var>
+                    <Var>RegistrationType</Var>
+                    <Var>NetAmountUSD</Var>
+                </Expr>
+            </Atom>
+        </Implies>
+        <!-- Expense of a speaker is converted and 
+        withdrawn from the CAD bank account -->
+        <Implies>
+            <And>
+                <Atom>
+                    <Rel>speaker</Rel>
+                    <Expr>
+                        <Fun per="copy">name</Fun>
+                        <Var>SpeakerName</Var>
+                    </Expr>
+                    <Var>SpeakerType</Var>
+                </Atom>
+                <Atom>
+                    <Rel>reimburse</Rel>
+                    <Var>SpeakerType</Var>
+                    <Var>AmountUSD</Var>
+                </Atom>
+                <Atom>
+                    <Rel>convertUSDToCAD</Rel>
+                    <Var>AmountUSD</Var>
+                    <Var>AmountCAD</Var>
+                </Atom>
+                <Atom>
+                    <Rel>outgoing</Rel>
+                    <Expr>
+                        <Fun per="copy">name</Fun>
+                        <Var>SpeakerName</Var>
+                    </Expr>
+                    <Var>AmountCAD</Var>
+                    <Ind>CIBCToronto</Ind>
+                </Atom>
+            </And>
+            <Atom>
+                <Rel>expense</Rel>
+                <Expr>
+                    <Fun per="copy">symposiumSpeaker</Fun>
+                    <Expr>
+                        <Fun per="copy">name</Fun>
+                        <Var>SpeakerName</Var>
+                    </Expr>
+                    <Var>SpeakerType</Var>
+                    <Var>AmountCAD</Var>
+                </Expr>
+            </Atom>
+        </Implies>
+    </Assert>
+</RuleML>
